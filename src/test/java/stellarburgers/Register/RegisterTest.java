@@ -18,9 +18,10 @@ public class RegisterTest {
     private String name;
     private String email;
     private String password;
-    //создаем переменные для запуска тестов в разных браузерах
+    // создаем переменные для запуска тестов в разных браузерах
     private String browserChrome = "Chrome";
-    //private String browserFirefox = "firefox";
+    private String browserFirefox = "firefox";
+
     private UserRequest user;
     private UserResponse userResponse;
 
@@ -72,5 +73,39 @@ public class RegisterTest {
         registerPage.clickRegisterButton();
         // Проверяем что появилось сообщение о некорректном пароле
         registerPage.incorrectPasswordWarning.shouldHave(Condition.text("Некорректный пароль"));
+    }
+
+    @Test
+    public void checkUnableRegisterShortPasswordFirefox() {
+        // Открываем страницу регистрации в браузере Firefox
+        Configuration.browser = browserFirefox;
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        // Создаем короткий пароль 5 символов
+        this.password = CreatingRandomData.getRandomShortAlexString();
+        // Вводим тестовые данные Имя, Email, Пароль
+        registerPage.inputNameField(name);
+        registerPage.inputEmailField(email);
+        registerPage.inputPasswordField(password);
+        // Кликаем кнопку Зарегистрироваться
+        registerPage.clickRegisterButton();
+        // Проверяем что появилось сообщение о некорректном пароле
+        registerPage.incorrectPasswordWarning.shouldHave(Condition.text("Некорректный пароль"));
+    }
+
+    @Test
+    public void checkSuccessfulRegistrationFirefox() {
+        // Открываем страницу регистрации в браузере Firefox
+        Configuration.browser = browserFirefox;
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        // Создаем "обычный" пароль
+        this.password = CreatingRandomData.getRandomAlekseyString();
+        // Вводим тестовые данные Имя, Email, Пароль
+        registerPage.inputNameField(name);
+        registerPage.inputEmailField(email);
+        registerPage.inputPasswordField(password);
+        // Кликаем кнопку Зарегистрироваться
+        registerPage.clickRegisterButton();
+        // Проверяем что заголовок страницы - "Вход"
+        registerPage.header.shouldHave(Condition.text("Вход"));
     }
 }
