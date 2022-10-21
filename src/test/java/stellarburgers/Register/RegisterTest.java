@@ -2,29 +2,52 @@ package stellarburgers.Register;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import org.junit.Assert;
+import io.restassured.RestAssured;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.PageObject.HomePage;
-import stellarburgers.PageObject.LoginPage;
+import stellarburgers.Constants.TestStandEndpoints;
 import stellarburgers.PageObject.RegisterPage;
+import stellarburgers.TestData.CreatingRandomData;
+import stellarburgers.UserRequest;
+import stellarburgers.UserResponse;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class RegisterTest {
-    private String name = "aДядька";
-    private String email = "aabcexample@example.com";
-    private String password = "somePassword";
-
+    private String name;
+    private String email;
+    private String password;
     //создаем переменные для запуска тестов в разных браузерах
     private String browserChrome = "Chrome";
     //private String browserFirefox = "firefox";
+    private UserRequest user;
+    private UserResponse userResponse;
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = TestStandEndpoints.BASE_URL;
+        this.name = CreatingRandomData.getRandomAlekseyString();
+        this.email = CreatingRandomData.getRandomAlekseyEmail();
+    }
+
+    // После окончания теста удаляем созданного пользователя
+    @After
+    public void deleteCreatedUser() {
+        this.user = new UserRequest(email,password);
+        this.userResponse = UserResponse.getLoginUserResponse(user);
+        if (userResponse.getSuccess()) {
+            UserResponse.deleteUser(userResponse);}
+    }
 
     @Test
-    public void checkRegistration() {
+    public void checkSuccessfulRegistrationChrome() {
         // Открываем страницу регистрации в браузере Chrome
         Configuration.browser = browserChrome;
         RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
-        // Вводим "обычные" тестовые данные Имя, Email, Пароль
+        // Создаем "обычный" пароль
+        this.password = CreatingRandomData.getRandomAlekseyString();
+        // Вводим тестовые данные Имя, Email, Пароль
         registerPage.inputNameField(name);
         registerPage.inputEmailField(email);
         registerPage.inputPasswordField(password);
@@ -35,14 +58,16 @@ public class RegisterTest {
     }
 
     @Test
-    public void checkPassword() {
+    public void checkUnableRegisterShortPasswordChrome() {
         // Открываем страницу регистрации в браузере Chrome
         Configuration.browser = browserChrome;
         RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
-        // Вводим "обычные" тестовые данные Имя, Email, Пароль
+        // Создаем короткий пароль 5 символов
+        this.password = CreatingRandomData.getRandomShortAlexString();
+        // Вводим тестовые данные Имя, Email, Пароль
         registerPage.inputNameField(name);
         registerPage.inputEmailField(email);
-        registerPage.inputPasswordField("123");
+        registerPage.inputPasswordField(password);
         // Кликаем кнопку Зарегистрироваться
         registerPage.clickRegisterButton();
         // Проверяем что появилось сообщение о некорректном пароле
