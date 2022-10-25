@@ -44,7 +44,6 @@ public class LoginTest {
     @After
     public void deleteCreatedUser() {
         UserResponse.deleteUser(userResponse);
-        System.out.println(email + " " + password);
     }
     @Test
     public void checkLoginHomePageEnterButton() {

@@ -1,3 +1,4 @@
 ProfileTest.class
-RegisterTest.class
 LoginTest.class
+RegisterTest.class
+BuilderTest.class
