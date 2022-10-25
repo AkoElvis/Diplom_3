@@ -64,16 +64,6 @@ public class RegisterPage {
         loginLink.click();
     }
 
-    // Метод получения названия заголовка
-    public String getHeader() {
-        return header.getText();
-    }
-
-    // Метод получения текста сообщения о некорректном пароле
-    public String getIncorrectPasswordWarning() {
-        return incorrectPasswordWarning.getText();
-    }
-
     // Метод получения экземпляра страницы Логин
     // клик по кнопке "Войти"
     public LoginPage getLoginPageEnterButton() {

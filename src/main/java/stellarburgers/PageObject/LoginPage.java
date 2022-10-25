@@ -10,14 +10,6 @@ import static com.codeborne.selenide.Selenide.page;
 public class LoginPage {
     public final static String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
 
-    // Локатор кнопки Зарегистрироваться
-    @FindBy(how = How.XPATH, using = ".//a[text()='Зарегистрироваться']")
-    SelenideElement registerLink;
-
-    // Локатор ссылки Личный кабинет
-    @FindBy(how = How.XPATH, using = ".//nav/a")
-    SelenideElement profileLink;
-
     @FindBy(how = How.XPATH, using = ".//div[@class = 'Auth_login__3hAey']/h2")
     public
     SelenideElement header;
@@ -33,16 +25,6 @@ public class LoginPage {
     // Локатор кнопки Войти
     @FindBy(how= How.XPATH, using = ".//form/button")
     SelenideElement enterButton;
-
-    // Метод клика по сслыке Зарегистрироваться
-    public void clickRegisterButton() {
-        registerLink.click();
-    }
-
-    // Метод клика по ссылке Личный кабинет
-    public void clickProfileLink() {
-        profileLink.click();
-    }
 
     // Метод получения названия заголовка
     public String getHeader() {
@@ -74,9 +56,7 @@ public class LoginPage {
     public HomePage loginProfile(String email, String password) {
         inputEmailField(email);
         inputPasswordField(password);
-        // клик по Войти
         clickEnterButton();
-        HomePage homePage = page(HomePage.class);
-        return homePage;
+        return page(HomePage.class);
     }
 }

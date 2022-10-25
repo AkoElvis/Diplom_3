@@ -45,4 +45,12 @@ public class HomePage {
         loginPage.waitForLoadLoginPage();
         return loginPage;
     }
+
+    // Метод получения экземпляра страницы Личный кабинет
+    // клик по кнопке «Личный кабинет» в шапке
+    public ProfilePage getProfilePageProfileLink() {
+        clickProfileLink();
+        ProfilePage profilePage = page(ProfilePage.class);
+        return profilePage;
+    }
 }

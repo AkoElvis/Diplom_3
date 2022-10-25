@@ -47,7 +47,7 @@ public class LoginTest {
         System.out.println(email + " " + password);
     }
     @Test
-    public void checkLoginHomePage() {
+    public void checkLoginHomePageEnterButton() {
         this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
         this.loginPage = homePage.getLoginPageEnterButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
@@ -55,7 +55,7 @@ public class LoginTest {
     }
 
     @Test
-    public void checkLoginProfileLink() {
+    public void checkLoginHomePageProfileLink() {
         this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
         this.loginPage = homePage.getLoginPageProfileLink();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
