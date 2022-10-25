@@ -22,6 +22,10 @@ public class ProfilePage {
     @FindBy(how = How.XPATH, using = ".//header/nav/div/a")
     public SelenideElement logo;
 
+    // Локатор кнопки Выход
+    @FindBy(how = How.XPATH, using = ".//button[text()='Выход']")
+    public SelenideElement logoutButton;
+
     // Метод клика по кнопке Конструктор
     public void clickBuilderButton() {
         builderButton.click();
@@ -30,6 +34,11 @@ public class ProfilePage {
     // Метод клика по логотипу Stellar Burgers
     public void clickLogo() {
         logo.click();
+    }
+
+    // Метод клика по кнопке Выход
+    public void clickLogoutButton() {
+        logoutButton.click();
     }
 
     // Метод получения экземпляра Главной страницы
@@ -44,5 +53,14 @@ public class ProfilePage {
     public HomePage getHomePageClickLogo() {
         clickLogo();
         return page(HomePage.class);
+    }
+
+    // Метод получения экземпляра страницы Логин
+    // клик по кнопке Выход
+    public LoginPage getLoginPageClickLogoutButton() {
+        clickLogoutButton();
+        LoginPage loginPage = page(LoginPage.class);
+        loginPage.waitForLoadLoginPage();
+        return loginPage;
     }
 }
