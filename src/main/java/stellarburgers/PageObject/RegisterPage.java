@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class RegisterPage {
     // URL Страницы регистрации
     public final static String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
@@ -57,6 +59,11 @@ public class RegisterPage {
         registerButton.click();
     }
 
+    // Метод клика по кнопке Войти
+    public void clickLoginLink() {
+        loginLink.click();
+    }
+
     // Метод получения названия заголовка
     public String getHeader() {
         return header.getText();
@@ -65,5 +72,14 @@ public class RegisterPage {
     // Метод получения текста сообщения о некорректном пароле
     public String getIncorrectPasswordWarning() {
         return incorrectPasswordWarning.getText();
+    }
+
+    // Метод получения экземпляра страницы Логин
+    // клик по кнопке "Войти"
+    public LoginPage getLoginPageEnterButton() {
+        clickLoginLink();
+        LoginPage loginPage = page(LoginPage.class);
+        loginPage.waitForLoadLoginPage();
+        return loginPage;
     }
 }

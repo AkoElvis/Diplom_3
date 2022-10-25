@@ -57,4 +57,11 @@ public class UserResponse {
                 .delete(TestStandEndpoints.USER);
     }
 
+    public static UserResponse getRegisterUserResponse(Object body) {
+        return given()
+                .header("Content-type", "application/json")
+                .body(body)
+                .when()
+                .post(TestStandEndpoints.REGISTER).as(UserResponse.class);
+    }
 }
