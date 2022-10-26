@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.page;
 public class LoginPage {
     public final static String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
 
+    // Локатор заголовка
     @FindBy(how = How.XPATH, using = ".//div[@class = 'Auth_login__3hAey']/h2")
     public
     SelenideElement header;

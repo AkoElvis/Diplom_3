@@ -19,22 +19,18 @@ import static com.codeborne.selenide.Selenide.open;
 public class LoginTest {
     private String email;
     private String password;
-    private String name;
     private UserResponse userResponse;
-    private UserRequest user;
     private HomePage homePage;
     private LoginPage loginPage;
-    private RegisterPage registerPage;
-    private ForgotPasswordPage forgotPasswordPage;
 
     // Перед каждым тестом формируем случайные тестовые данные и создаем пользователя
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        this.name = CreatingRandomData.getRandomAlekseyString();
+        String name = CreatingRandomData.getRandomAlekseyString();
         this.email = CreatingRandomData.getRandomAlekseyEmail();
         this.password = CreatingRandomData.getRandomAlekseyString();
-        this.user = new UserRequest(email,password,name);
+        UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox
         //Configuration.browser = Browsers.FIREFOX;
@@ -63,7 +59,7 @@ public class LoginTest {
 
     @Test
     public void checkLoginRegisterPage() {
-        this.registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
         this.loginPage = registerPage.getLoginPageEnterButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
         signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));
@@ -71,7 +67,7 @@ public class LoginTest {
 
     @Test
     public void checkLoginForgotPasswordPage() {
-        this.forgotPasswordPage = open(ForgotPasswordPage.FORGOT_PASSWORD_URL, ForgotPasswordPage.class);
+        ForgotPasswordPage forgotPasswordPage = open(ForgotPasswordPage.FORGOT_PASSWORD_URL, ForgotPasswordPage.class);
         this.loginPage = forgotPasswordPage.getLoginPageEnterButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
         signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));

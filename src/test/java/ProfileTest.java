@@ -19,28 +19,23 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ProfileTest {
     private String email;
-    private String password;
-    private String name;
     private UserResponse userResponse;
-    private UserRequest user;
-    private HomePage homePage;
-    private LoginPage loginPage;
     private HomePage signedInHomePage;
 
     // Перед каждым тестом формируем случайные тестовые данные и создаем пользователя
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        this.name = CreatingRandomData.getRandomAlekseyString();
+        String name = CreatingRandomData.getRandomAlekseyString();
         this.email = CreatingRandomData.getRandomAlekseyEmail();
-        this.password = CreatingRandomData.getRandomAlekseyString();
-        this.user = new UserRequest(email,password,name);
+        String password = CreatingRandomData.getRandomAlekseyString();
+        UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox
-        //Configuration.browser = Browsers.FIREFOX;
-        this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
-        this.loginPage = homePage.getLoginPageEnterButton();
-        this.signedInHomePage = loginPage.loginProfile(email,password);
+        Configuration.browser = Browsers.FIREFOX;
+        HomePage homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
+        LoginPage loginPage = homePage.getLoginPageEnterButton();
+        this.signedInHomePage = loginPage.loginProfile(email, password);
     }
 
     // После окончания теста удаляем созданного пользователя

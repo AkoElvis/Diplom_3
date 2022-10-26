@@ -72,4 +72,24 @@ public class RegisterPage {
         loginPage.waitForLoadLoginPage();
         return loginPage;
     }
+
+    // Метод регистрации нового пользователя
+    // возвращает экземпляр страницы Логин
+    public LoginPage getLoginPageRegisterNewUser(String name, String email, String password) {
+        inputNameField(name);
+        inputEmailField(email);
+        inputPasswordField(password);
+        clickRegisterButton();
+        LoginPage loginPage = page(LoginPage.class);
+        loginPage.waitForLoadLoginPage();
+        return loginPage;
+    }
+
+    // Метод регистрации нового пользователя
+    public void registerNewUser(String name, String email, String password) {
+        inputNameField(name);
+        inputEmailField(email);
+        inputPasswordField(password);
+        clickRegisterButton();
+    }
 }

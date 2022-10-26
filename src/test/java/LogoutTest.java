@@ -16,30 +16,23 @@ import stellarburgers.UserResponse;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LogoutTest {
-    private String email;
-    private String password;
-    private String name;
     private UserResponse userResponse;
-    private UserRequest user;
-    private HomePage homePage;
-    private LoginPage loginPage;
-    private HomePage signedInHomePage;
     private ProfilePage profilePage;
 
     // Перед каждым тестом формируем случайные тестовые данные и создаем пользователя
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        this.name = CreatingRandomData.getRandomAlekseyString();
-        this.email = CreatingRandomData.getRandomAlekseyEmail();
-        this.password = CreatingRandomData.getRandomAlekseyString();
-        this.user = new UserRequest(email,password,name);
+        String name = CreatingRandomData.getRandomAlekseyString();
+        String email = CreatingRandomData.getRandomAlekseyEmail();
+        String password = CreatingRandomData.getRandomAlekseyString();
+        UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox
         //Configuration.browser = Browsers.FIREFOX;
-        this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
-        this.loginPage = homePage.getLoginPageEnterButton();
-        this.signedInHomePage = loginPage.loginProfile(email,password);
+        HomePage homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
+        LoginPage loginPage = homePage.getLoginPageEnterButton();
+        HomePage signedInHomePage = loginPage.loginProfile(email, password);
         this.profilePage = signedInHomePage.getProfilePageProfileLink();
     }
 
