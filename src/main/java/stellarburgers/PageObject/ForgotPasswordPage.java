@@ -1,6 +1,7 @@
 package stellarburgers.PageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -15,12 +16,14 @@ public class ForgotPasswordPage {
     SelenideElement loginLink;
 
     // Метод клика по кнопке Войти
+    @Step("Click the Login button on the Forgot Password page")
     public void clickLoginLink() {
         loginLink.click();
     }
 
     // Метод получения экземпляра страницы Логин
     // клик по кнопке "Войти"
+    @Step("Click the Login button on the Forgot Password page and go to the Login page")
     public LoginPage getLoginPageEnterButton() {
         clickLoginLink();
         LoginPage loginPage = page(LoginPage.class);

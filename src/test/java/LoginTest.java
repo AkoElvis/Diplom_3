@@ -1,10 +1,10 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.Constants.Browsers;
 import stellarburgers.Constants.TestStandEndpoints;
 import stellarburgers.PageObject.ForgotPasswordPage;
 import stellarburgers.PageObject.HomePage;
@@ -22,6 +22,12 @@ public class LoginTest {
     private UserResponse userResponse;
     private HomePage homePage;
     private LoginPage loginPage;
+    private String expectedButtonName = "Оформить заказ";
+
+    @Step("Check that the name of a Login/Order button matches the expected")
+    public void checkOrderButtonName(HomePage signedInHomePage, String buttonName) {
+        signedInHomePage.loginOrOrderButton.shouldHave(Condition.exactText(buttonName));
+    }
 
     // Перед каждым тестом формируем случайные тестовые данные и создаем пользователя
     @Before
@@ -41,35 +47,48 @@ public class LoginTest {
     public void deleteCreatedUser() {
         UserResponse.deleteUser(userResponse);
     }
+
     @Test
+    @DisplayName("Checking that it is available to log in clicking the Login button." +
+            "The Home page should open." +
+            "The name of the Login/Order button should match the expected")
     public void checkLoginHomePageEnterButton() {
         this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
-        this.loginPage = homePage.getLoginPageEnterButton();
+        this.loginPage = homePage.getLoginPageLoginButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
-        signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));
+        checkOrderButtonName(signedInHomePage, expectedButtonName);
     }
 
     @Test
+    @DisplayName("Checking that it is available to log in clicking the Profile button in the Header. " +
+            "The Home page should open. " +
+            "The name of the Login/Order button should match the expected")
     public void checkLoginHomePageProfileLink() {
         this.homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
         this.loginPage = homePage.getLoginPageProfileLink();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
-        signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));
+        checkOrderButtonName(signedInHomePage, expectedButtonName);
     }
 
     @Test
+    @DisplayName("Checking that it is available to log in clicking the Login button in the Register page. " +
+            "The Home page should open. " +
+            "The name of the Login/Order button should match the expected")
     public void checkLoginRegisterPage() {
         RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
-        this.loginPage = registerPage.getLoginPageEnterButton();
+        this.loginPage = registerPage.getLoginPageLoginButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
-        signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));
+        checkOrderButtonName(signedInHomePage, expectedButtonName);
     }
 
     @Test
+    @DisplayName("Checking that it is available to log in clicking the Login button in the Forgot Password page. " +
+            "The Home page should open. " +
+            "The name of the Login/Order button should match the expected")
     public void checkLoginForgotPasswordPage() {
         ForgotPasswordPage forgotPasswordPage = open(ForgotPasswordPage.FORGOT_PASSWORD_URL, ForgotPasswordPage.class);
         this.loginPage = forgotPasswordPage.getLoginPageEnterButton();
         HomePage signedInHomePage = loginPage.loginProfile(email,password);
-        signedInHomePage.loginOrOrderButton.shouldHave(Condition.text("Оформить заказ"));
+        checkOrderButtonName(signedInHomePage, expectedButtonName);
     }
 }

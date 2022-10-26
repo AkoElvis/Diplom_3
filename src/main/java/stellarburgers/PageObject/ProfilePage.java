@@ -1,6 +1,7 @@
 package stellarburgers.PageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -27,22 +28,26 @@ public class ProfilePage {
     public SelenideElement logoutButton;
 
     // Метод клика по кнопке Конструктор
+    @Step("Click the Builder button on the Profile page")
     public void clickBuilderButton() {
         builderButton.click();
     }
 
     // Метод клика по логотипу Stellar Burgers
+    @Step("Click the logo on the Profile page")
     public void clickLogo() {
         logo.click();
     }
 
     // Метод клика по кнопке Выход
+    @Step("Click the Logout button on the Profile page")
     public void clickLogoutButton() {
         logoutButton.click();
     }
 
     // Метод получения экземпляра Главной страницы
     // клик на «Конструктор»
+    @Step("Click the Builder button on the Profile page and go to the Home page")
     public HomePage getHomePageClickBuilderButton() {
         clickBuilderButton();
         return page(HomePage.class);
@@ -50,6 +55,7 @@ public class ProfilePage {
 
     // Метод получения экземпляра Главной страницы
     // клик по логотипу Stellar Burgers
+    @Step("Click the logo on the Profile page and go to the Home page")
     public HomePage getHomePageClickLogo() {
         clickLogo();
         return page(HomePage.class);
@@ -57,6 +63,7 @@ public class ProfilePage {
 
     // Метод получения экземпляра страницы Логин
     // клик по кнопке Выход
+    @Step("Click the Logout button on the Profile page and go to the Login page")
     public LoginPage getLoginPageClickLogoutButton() {
         clickLogoutButton();
         LoginPage loginPage = page(LoginPage.class);

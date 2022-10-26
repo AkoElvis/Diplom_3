@@ -1,5 +1,7 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +24,11 @@ public class ProfileTest {
     private UserResponse userResponse;
     private HomePage signedInHomePage;
 
+    @Step("Check that the Login field contains the user's email")
+    public void checkLoginFieldContainsEmail(ProfilePage profilePage, String email) {
+        profilePage.loginValue.shouldHave(Condition.exactValue(email.toLowerCase(Locale.ROOT)));
+    }
+
     // Перед каждым тестом формируем случайные тестовые данные и создаем пользователя
     @Before
     public void setUp() {
@@ -32,9 +39,9 @@ public class ProfileTest {
         UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox
-        Configuration.browser = Browsers.FIREFOX;
+        //Configuration.browser = Browsers.FIREFOX;
         HomePage homePage = open(HomePage.HOME_PAGE_URL, HomePage.class);
-        LoginPage loginPage = homePage.getLoginPageEnterButton();
+        LoginPage loginPage = homePage.getLoginPageLoginButton();
         this.signedInHomePage = loginPage.loginProfile(email, password);
     }
 
@@ -45,8 +52,11 @@ public class ProfileTest {
     }
 
     @Test
+    @DisplayName("Check that the authorized user may access the Profile by clicking the Profile button on the Home page. " +
+            "The Profile page should open. " +
+            "The Login field should contain the user's email")
     public void checkGoProfile() {
         ProfilePage profilePage = signedInHomePage.getProfilePageProfileLink();
-        profilePage.loginValue.shouldHave(Condition.value(email.toLowerCase(Locale.ROOT)));
+        checkLoginFieldContainsEmail(profilePage,email);
     }
 }
