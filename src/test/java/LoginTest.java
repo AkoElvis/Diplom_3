@@ -33,9 +33,9 @@ public class LoginTest {
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        String name = CreatingRandomData.getRandomAlekseyString();
-        this.email = CreatingRandomData.getRandomAlekseyEmail();
-        this.password = CreatingRandomData.getRandomAlekseyString();
+        String name = CreatingRandomData.getRandomEdeltanString();
+        this.email = CreatingRandomData.getRandomEdeltanEmail();
+        this.password = CreatingRandomData.getRandomEdeltanString();
         UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox

@@ -1,12 +1,10 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.Constants.Browsers;
 import stellarburgers.Constants.TestStandEndpoints;
 import stellarburgers.PageObject.HomePage;
 import stellarburgers.PageObject.LoginPage;
@@ -33,9 +31,9 @@ public class ProfileTest {
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        String name = CreatingRandomData.getRandomAlekseyString();
-        this.email = CreatingRandomData.getRandomAlekseyEmail();
-        String password = CreatingRandomData.getRandomAlekseyString();
+        String name = CreatingRandomData.getRandomEdeltanString();
+        this.email = CreatingRandomData.getRandomEdeltanEmail();
+        String password = CreatingRandomData.getRandomEdeltanString();
         UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox

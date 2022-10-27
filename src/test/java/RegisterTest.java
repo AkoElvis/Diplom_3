@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
@@ -7,7 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import stellarburgers.Constants.TestStandEndpoints;
-import stellarburgers.Constants.Browsers;
 import stellarburgers.PageObject.LoginPage;
 import stellarburgers.PageObject.RegisterPage;
 import stellarburgers.TestData.CreatingRandomData;
@@ -37,8 +35,8 @@ public class RegisterTest {
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        this.name = CreatingRandomData.getRandomAlekseyString();
-        this.email = CreatingRandomData.getRandomAlekseyEmail();
+        this.name = CreatingRandomData.getRandomEdeltanString();
+        this.email = CreatingRandomData.getRandomEdeltanEmail();
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox
         //Configuration.browser = Browsers.FIREFOX;
         this.registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
@@ -59,7 +57,7 @@ public class RegisterTest {
             "The name of the page header should match the expected")
     public void checkSuccessfulRegistration() {
         // Создаем "обычный" пароль
-        this.password = CreatingRandomData.getRandomAlekseyString();
+        this.password = CreatingRandomData.getRandomEdeltanString();
         // Заполняем форму регистрации и нажимаем Зарегистрироваться
         // открывается страница Логин
         LoginPage loginPage = registerPage.getLoginPageRegisterNewUser(name,email,password);

@@ -64,6 +64,8 @@ public class LoginPage {
         inputEmailField(email);
         inputPasswordField(password);
         clickEnterButton();
-        return page(HomePage.class);
+        HomePage homePage = page(HomePage.class);
+        homePage.waitForLoadHomePage();
+        return homePage;
     }
 }

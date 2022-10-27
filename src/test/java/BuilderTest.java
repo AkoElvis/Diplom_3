@@ -30,9 +30,9 @@ public class BuilderTest {
     @Before
     public void setUp() {
         RestAssured.baseURI = TestStandEndpoints.BASE_URL;
-        String name = CreatingRandomData.getRandomAlekseyString();
-        String email = CreatingRandomData.getRandomAlekseyEmail();
-        String password = CreatingRandomData.getRandomAlekseyString();
+        String name = CreatingRandomData.getRandomEdeltanString();
+        String email = CreatingRandomData.getRandomEdeltanEmail();
+        String password = CreatingRandomData.getRandomEdeltanString();
         UserRequest user = new UserRequest(email, password, name);
         this.userResponse = UserResponse.getRegisterUserResponse(user);
         // Раскомментировать строку ниже чтобы тестировать в браузере Firefox

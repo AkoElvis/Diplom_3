@@ -50,7 +50,9 @@ public class ProfilePage {
     @Step("Click the Builder button on the Profile page and go to the Home page")
     public HomePage getHomePageClickBuilderButton() {
         clickBuilderButton();
-        return page(HomePage.class);
+        HomePage homePage = page(HomePage.class);
+        homePage.waitForLoadHomePage();
+        return homePage;
     }
 
     // Метод получения экземпляра Главной страницы
@@ -58,7 +60,9 @@ public class ProfilePage {
     @Step("Click the logo on the Profile page and go to the Home page")
     public HomePage getHomePageClickLogo() {
         clickLogo();
-        return page(HomePage.class);
+        HomePage homePage = page(HomePage.class);
+        homePage.waitForLoadHomePage();
+        return homePage;
     }
 
     // Метод получения экземпляра страницы Логин

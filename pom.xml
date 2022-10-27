@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.scooter.praktikum</groupId>
-    <artifactId>first-sprint</artifactId>
+    <artifactId>diplom-3</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!--Этот блок нужен для корректой работы с JDK9+-->
