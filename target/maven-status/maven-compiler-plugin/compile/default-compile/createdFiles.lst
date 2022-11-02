@@ -1,0 +1,10 @@
+stellarburgers\UserResponse.class
+stellarburgers\Constants\Browsers.class
+stellarburgers\PageObject\ForgotPasswordPage.class
+stellarburgers\Constants\TestStandEndpoints.class
+stellarburgers\PageObject\ProfilePage.class
+stellarburgers\PageObject\LoginPage.class
+stellarburgers\PageObject\HomePage.class
+stellarburgers\UserRequest.class
+stellarburgers\PageObject\RegisterPage.class
+stellarburgers\TestData\CreatingRandomData.class
