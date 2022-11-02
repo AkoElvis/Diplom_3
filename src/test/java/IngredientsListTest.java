@@ -1,10 +1,8 @@
-import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.Constants.Browsers;
-import stellarburgers.PageObject.HomePage;
+import stellarburgers.pageobject.HomePage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertEquals;

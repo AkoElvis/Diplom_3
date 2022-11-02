@@ -1,4 +1,4 @@
-package stellarburgers.TestData;
+package stellarburgers.testdata;
 
 import java.util.Random;
 

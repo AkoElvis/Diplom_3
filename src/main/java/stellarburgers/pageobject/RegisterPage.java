@@ -1,4 +1,4 @@
-package stellarburgers.PageObject;
+package stellarburgers.pageobject;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

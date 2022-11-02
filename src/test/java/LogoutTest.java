@@ -5,11 +5,11 @@ import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import stellarburgers.Constants.TestStandEndpoints;
-import stellarburgers.PageObject.HomePage;
-import stellarburgers.PageObject.LoginPage;
-import stellarburgers.PageObject.ProfilePage;
-import stellarburgers.TestData.CreatingRandomData;
+import stellarburgers.constants.TestStandEndpoints;
+import stellarburgers.pageobject.HomePage;
+import stellarburgers.pageobject.LoginPage;
+import stellarburgers.pageobject.ProfilePage;
+import stellarburgers.testdata.CreatingRandomData;
 import stellarburgers.UserRequest;
 import stellarburgers.UserResponse;
 

@@ -1,6 +1,6 @@
 package stellarburgers;
 
-import stellarburgers.Constants.TestStandEndpoints;
+import stellarburgers.constants.TestStandEndpoints;
 import static io.restassured.RestAssured.given;
 
 public class UserResponse {

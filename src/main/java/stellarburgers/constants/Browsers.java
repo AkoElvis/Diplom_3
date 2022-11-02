@@ -1,4 +1,4 @@
-package stellarburgers.Constants;
+package stellarburgers.constants;
 
 public class Browsers {
     public static final String CHROME = "Chrome";
